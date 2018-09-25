@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.asus.recyclerviewjson.adapter.RvAdapter;
 import com.example.asus.recyclerviewjson.model.Rvdata;
 import com.google.gson.Gson;
+import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,8 +25,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Rvdata> proSearch = new ArrayList<Rvdata>();
-    RecyclerView rvTechSolPoint;
+
     RvAdapter rvAdapter;
+    MultiSnapRecyclerView multiSnapRecyclerView;
 
 
     @Override
@@ -35,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
         // ArrayList<Rvdata> rvdata = getData();
 
-        rvTechSolPoint = findViewById(R.id.rv_techsolpoint);
-        rvTechSolPoint.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-        rvTechSolPoint.setLayoutManager(layoutManager);
+
+       // LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+       // rvTechSolPoint.setLayoutManager(layoutManager);
+       multiSnapRecyclerView = findViewById(R.id.first_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        multiSnapRecyclerView.setLayoutManager(layoutManager);
 
         getServerData();
     }
@@ -63,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
                                 proSearch.add(rvdata);
                             }
                             rvAdapter = new RvAdapter(getApplicationContext(), proSearch);
-                            rvTechSolPoint.setAdapter(rvAdapter);
+                            multiSnapRecyclerView.setAdapter(rvAdapter);
+
 
 
                         } catch (JSONException e) {
